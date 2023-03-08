@@ -1,0 +1,25 @@
+{% extends 'users/base.html' %}
+
+{% block lk %}
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <form method="post">
+                {% csrf_token %}
+                    <div class="form-error">{{ form.non_field_errors }}</div>
+                          <div class="d-flex justify-content-between">
+                              <p><label class="form-label" for="{{ form.username.id_for_label }}">{{ form.username.label }} / Email:</label></p>
+                              <p>{{ form.username }}</p>
+                          </div>
+                        <div class="form-error">{{ form.username.errors }}</div>
+                          <div class="d-flex justify-content-between">
+                              <p><label class="form-label" for="{{ form.password.id_for_label }}">{{ form.password.label }}:</label></p>
+                              <p>{{ form.password }}</p>
+                          </div>
+                        <div class="form-error">{{ form.password.errors }}</div>
+                <br>
+        <button type="submit" class="btn btn-primary">Войти</button>
+        </form>
+        <a href="{% url 'password_reset' %}">Забыли пароль?</a>
+    </div>
+</div>
+{%  endblock %}

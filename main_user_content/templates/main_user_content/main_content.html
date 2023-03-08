@@ -1,0 +1,26 @@
+{% extends 'main_user_content/base.html' %}
+
+{% block content %}
+{{ main_content.main_content | safe }}
+<br>
+<br>
+<br>
+    {% if work_type_review %}
+    <h5 class="teg">Отзывы на услугу</h5>
+        <div class="row">
+        <div class="col-md-6 mx-auto my-3">
+                {%  for review in work_type_review %}
+                <div class="border border-primary px-3 my-3">
+                    <div class="d-flex justify-content-between">
+                        <p class="fw-light"> Автор: {{ review.review_author }}</p><p class="fs-5">{{ review.specialization }}</p><p class="fw-light">{{ review.time_create }}</p>
+                    </div>
+                <div class="my-3 py-3">
+                        <p>{{ review.review_content }}</p>
+                </div>
+                    {% if review.time_update != review.time_create %}<p class="text-end fw-light">Изменен: {{ review.time_update }}</p> {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+    {% endif %}
+{%  endblock %}

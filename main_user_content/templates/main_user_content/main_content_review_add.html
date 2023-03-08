@@ -1,0 +1,19 @@
+{% extends 'main_user_content/base.html' %}
+
+{% block content %}
+    <h2 class="teg">Добавьте отзыв</h2>
+        <div class="row">
+            <div class="col-md-6 mx-auto my-3">
+                <form action="{% url 'main_content_review_add' %}" method="post">
+                    {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for form_el in form %}
+                        <p>{{ form_el.errors }}</p>
+                        <p><label class="form-label" for="{{ form_el.id_for_label }}">{{ form_el.label }}:</label>{{ form_el }}</p>
+                    {% endfor %}
+                <br>
+                    <input type="submit" class="btn btn-primary" value="Добавить">
+                </form>
+            </div>
+        </div>
+{%  endblock %}

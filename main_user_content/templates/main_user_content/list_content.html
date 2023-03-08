@@ -1,0 +1,14 @@
+{% extends 'main_user_content/base.html' %}
+
+{% block content %}
+    {% for work in city_content %}
+        <p>
+            {% if work.preview_img %}
+                <img src="{{ work.preview_img.url }}">
+            {% else %}
+                <img src="/media/type-preview/no-prev-img.bmp">
+            {% endif %}
+            {{ work.work_type }}
+        </p>
+    {% endfor %}
+{%  endblock %}

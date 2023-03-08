@@ -1,0 +1,23 @@
+{% extends 'users/base.html' %}
+
+{% block lk %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+            <h5>Email требует подтверждения!</h5>
+        <br>
+        <form method="post">
+                {% csrf_token %}
+                    {{ form.non_field_errors }}
+                    {% for form_el in form %}
+                          <div class="d-flex justify-content-between">
+                              <p><label class="form-label" for="{{ form_el.id_for_label }}">{{ form_el.label }}:</label></p>
+                              <p>{{ form_el }}</p>
+                          </div>
+                        <div class="form-error">{{ form_el.errors }}</div>
+                    {% endfor %}
+                <br>
+        <button type="submit" class="btn btn-primary">Регистрация</button>
+        </form>
+    </div>
+</div>
+{%  endblock %}

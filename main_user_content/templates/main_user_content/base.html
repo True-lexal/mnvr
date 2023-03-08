@@ -1,0 +1,107 @@
+{% extends 'main_user_content/base_top.html' %}
+
+  {% block telephone %}
+        {#     Telephone number from bd      #}
+        <a href="{{ telephone_href }}" class="navbar-toggler">
+          {{ telephone_view }}
+        </a>
+  {% endblock %}
+
+
+{% block dropdownmenu %}
+<!--  dropdown menu for mobile  -->
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="btn-group-vertical navbar-nav mb-0 mb-lg-0 mx-5" role="group" aria-label="Vertical button group">
+
+{#      buttons witm elements of work types      #}
+
+    {% for specializ in all_specializations %}
+
+            <button id="btnGroupDropSant" type="button" class="btn btn-primary me-auto my-1 dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">{{ specializ }}</button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDropSant">
+                    {% for work_type_name in content_data_for_menu %}
+                        {% if work_type_name.specialization == specializ %}
+                          <li><a class="dropdown-item" href="{{ work_type_name.get_absolute_url }}">{{ work_type_name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+            </ul>
+
+    {% endfor %}
+
+                    <button id="btnGroupDropSant" type="button" class="btn btn-primary me-auto my-1 dropdown-toggle"
+                    data-bs-toggle="dropdown" aria-expanded="false">Города</button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDropSant">
+                    {% for city_name in all_cityes %}
+                          <li><a class="dropdown-item" href="{{ city_name.get_absolute_url }}">{{ city_name }}</a></li>
+                    {% endfor %}
+            </ul>
+
+
+    </div>
+    </div>
+<!--    end   -->
+{% endblock %}
+{% block middle_header %}
+<div class="start">
+<div class="container d-none d-lg-block">
+    <nav>
+        <ul class="nav justify-content-center">
+
+              {#      buttons witm elements of work types      #}
+
+            {% for specializ in all_specializations %}
+
+          <li class="nav-item">
+              <button id="btnGroupDropSant" type="button" class="btn btn-primary m-3 dropdown-toggle"
+                      data-bs-toggle="dropdown" aria-expanded="false">{{ specializ }}</button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDropSant">
+                    {% for work_type_name in content_data_for_menu %}
+                        {% if work_type_name.specialization == specializ %}
+                          <li><a class="dropdown-item" href="{{ work_type_name.get_absolute_url }}">{{ work_type_name }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+            </ul>
+          </li>
+
+        {% endfor %}
+
+          <li class="nav-item">
+            <button id="btnGroupDropElekt" type="button" class="btn btn-primary dropdown-toggle m-3"
+                    data-bs-toggle="dropdown" aria-expanded="false">Города</button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDropSant">
+                    {% for city_name in all_cityes %}
+                          <li><a class="dropdown-item" href="{{ city_name.get_absolute_url }}">{{ city_name }}</a></li>
+                    {% endfor %}
+            </ul>
+
+
+          </li>
+        </ul>
+    </nav>
+</div>
+<div class="container my-5">
+   <div class="row align-items-center">
+    <div class="col-4 text-center">
+        <button type="button" class="btn btn-danger">Срочный звонок</button>
+    </div>
+    <div class="col-4 main-tel mx-auto text-center">
+        <a href="{{ telephone_href }}" class="main-tel"> {{ telephone_view }} </a><br><p> Бесплатная консультация опытного мастера!</p>
+    </div>
+    <div class="col-4 text-center">
+        <button type="button" class="btn btn-primary">Чат с ------</button>
+    </div>
+</div>
+</div>
+   <div class="container mt-5">
+    <div class="col-md-4 mx-auto">
+   <div class="btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups">
+   <div class="input-group">
+    <div class="input-group-text" id="btnGroupAddon">+7</div>
+    <input type="text" class="form-control" placeholder="999 999 99 99" aria-label="999 999 99 99" aria-describedby="btnGroupAddon">
+  </div>
+    <div class="btn-group" role="group" aria-label="First group">
+    <button type="button" class="btn btn-primary">Обратная связь!</button>
+  </div>
+   </div></div></div></div>
+{% endblock %}

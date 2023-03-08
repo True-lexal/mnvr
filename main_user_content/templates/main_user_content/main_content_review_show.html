@@ -1,0 +1,61 @@
+{% extends 'main_user_content/base.html' %}
+
+{% block content %}
+    <h1 class="teg">Отзывы</h1>
+    <div class="row">
+        <div class="col-md-6 mx-auto my-3">
+        <div class="mx-auto">
+            <a href="{% url 'main_content_review_add' %}">
+                <button type="button" class="btn btn-primary">Оставить отзыв</button>
+            </a>
+        </div>
+            {%  for review in all_reviews %}
+                <div class="border border-primary px-3 mt-3">
+                    <div class="d-flex justify-content-between">
+                        {% if not review.review_author %}
+                            <p class="fw-light"> Автор: без регистрации</p>
+                        {% else %}
+                            <p class="fw-light"> Автор: {{ review.review_author }}</p>
+                        {% endif %}
+                        <p class="fs-5">{{ review.specialization }}</p>
+                        <p class="fw-light">{{ review.time_create }}</p>
+                    </div>
+                <div class="my-3 py-3">
+                        <p>{{ review.review_content }}</p>
+                </div>
+                {% if user.is_authenticated %}
+                     <a href="#{{ review.pk }}" class="btn btn-sm btn-primary">Оветить</a>
+                       <a href="#x" class="overlay" id="{{ review.pk }}"></a>
+                       <div class="popup">
+                      <form action="{% url 'review_answer_add' review.pk %}" method="post" class="form-container">
+                        {% csrf_token %}
+                          <p><label class="form-label" for="{{ form.answer_content.id_for_label }}">{{ form.answer_content.label }}:</label>{{ form.answer_content }}</p>
+{#                          <p>{{ form.review }}</p>#}
+                          <input type="submit" class="btn btn-primary" value="Ответить">
+                            </form>
+                        <a class="close"title="Закрыть" href="#close"></a>
+                        </div>
+
+                {% endif %}
+{#                    {% if review.time_update != review.time_create %}#}
+{#                        <p class="text-end fw-light">Изменен: {{ review.time_update }}</p>#}
+{#                    {% endif %}#}
+                </div>
+                {% for answer in answer_review %}
+                {% if answer.review_id == review.id %}
+                    <div class="col-md-11 mx-auto">
+                    <div class="border border-warning px-3">
+                        <div class="d-flex justify-content-between">
+                            <p>{{ answer.review_author }}</p><p>{{  answer.time_create }}</p>
+                        </div>
+                        <div class="px-3 mx-3">
+                            <p>{{ answer.answer_content }}</p>
+                        </div>
+                    </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+{%  endblock %}

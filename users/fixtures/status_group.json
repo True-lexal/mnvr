@@ -1,0 +1,16 @@
+[
+  {
+    "model": "users.CustomUserStatus",
+    "pk": 1,
+    "fields": {
+      "status_name": "Пользователь"
+    }
+  },
+  {
+    "model": "users.CustomUserGroup",
+    "pk": 1,
+    "fields": {
+      "group_name": "Пользователь"
+    }
+  }
+]
